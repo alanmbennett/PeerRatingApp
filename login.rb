@@ -50,7 +50,7 @@ end
 # Returns the role of the given user, returns null if user not found
 def getUserRole(username)
   db = SQLite3::Database.open("peerratingdb.db")
-  statement = db.prepare("select role from User where username=?")
+  statement = db.prepare("select role from Users where username=?")
   statement.bind_params(username)
 
   if userExists?(username)
@@ -61,5 +61,4 @@ def getUserRole(username)
 
   return null
 end
-
 
