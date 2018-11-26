@@ -47,5 +47,3 @@ def passwordsMatch?(username, password)
   return false # Passwords do not match
 end
 
-puts passwordsMatch?("coolkid","123")
-
