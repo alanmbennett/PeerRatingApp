@@ -1,3 +1,5 @@
+# Attention: File meant for sandbox purposes only
+
 require 'sqlite3'
 
 db = SQLite3::Database.open('peerratingdb.db')
