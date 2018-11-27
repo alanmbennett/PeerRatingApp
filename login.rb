@@ -62,3 +62,27 @@ def getUserRole(username)
   return null
 end
 
+
+#sinatra section
+
+get '/login' do
+  erb :login
+end
+
+post '/login' do
+  if 'thing' == params[:username]
+    session[:something] = true
+    redirect to('/stuff')
+  else
+    "We Login Failed"
+    erb :login
+  end
+end
+
+get '/stuff' do
+  "stuff page"
+end
+
+get '/other' do
+  "something"
+end

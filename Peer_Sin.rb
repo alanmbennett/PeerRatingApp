@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'login'
+require './login'
 
 get '/' do
   "This exists"
