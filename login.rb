@@ -64,7 +64,7 @@ def getUserRole(username)
 end
 
 def isTA?(username)
-  if(getUserRole(username) == "TA")
+  if getUserRole(username) == "TA"
     return true
   end
 
@@ -72,7 +72,7 @@ def isTA?(username)
 end
 
 def isInstructor?(username)
-  if(getUserRole(username) == "instructor")
+  if getUserRole(username) == "instructor"
     return true
   end
 
@@ -80,7 +80,7 @@ def isInstructor?(username)
 end
 
 def isStudent?(username)
-  if(getUserRole(username) == "student")
+  if getUserRole(username) == "student"
     return true
   end
 
