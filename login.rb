@@ -69,13 +69,21 @@ get '/login' do
   erb :login
 end
 
+get '/Flogin' do
+  erb :Flogin
+end
+
 post '/login' do
-  if 'thing' == params[:username]
-    session[:something] = true
-    redirect to('/stuff')
+  if passwordsMatch?(params[:username], params[:password])
+    if getUserRole(params[:username]) == true
+      session[:killer] = true
+      redirect to('/killer')
+    else
+      session[:stud] = true
+      redirect to('/stud')
+    end
   else
-    "We Login Failed"
-    erb :login
+    redirect to ('/Flogin')
   end
 end
 
@@ -83,6 +91,6 @@ get '/stuff' do
   "stuff page"
 end
 
-get '/other' do
+get '/killer' do
   "something"
 end
