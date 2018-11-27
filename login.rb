@@ -1,4 +1,5 @@
 require 'bcrypt'
+require 'sinatra'
 require 'sqlite3'
 
 # Creates an account unless user already exists in database
@@ -62,6 +63,29 @@ def getUserRole(username)
   return null
 end
 
+def isTA?(username)
+  if(getUserRole(username) == "TA")
+    return true
+  end
+
+  return false
+end
+
+def isInstructor?(username)
+  if(getUserRole(username) == "instructor")
+    return true
+  end
+
+  return false
+end
+
+def isStudent?(username)
+  if(getUserRole(username) == "student")
+    return true
+  end
+
+  return false
+end
 
 #sinatra section
 
