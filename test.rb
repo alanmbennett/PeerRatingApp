@@ -1,8 +1,9 @@
 # Attention: File meant for sandbox purposes only
 
 require 'sqlite3'
+require './db_management.rb'
 
-db = SQLite3::Database.open('peerratingdb.db')
+db = openDatabase
 
 db.execute("select * from Users") do |result|
   print result

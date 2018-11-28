@@ -1,8 +1,9 @@
 require 'sqlite3'
+require './db_management.rb'
 
 # Returns true if Vote was successful, returns false if Vote failed
 def vote(username, filepath, rank)
-  db = SQLite3::Database.open("peerratingdb.db")
+  db = openDatabase
 
   # Check to see if vote already exists
   if voteExists?(username, rank)
@@ -22,7 +23,7 @@ def vote(username, filepath, rank)
 end
 
 def voteExists?(username, rank)
-  db = SQLite3::Database.open("peerratingdb.db")
+  db = openDatabase
 
   statement = db.prepare("select username, rank from VotedFor where username=? and rank=?")
   statement.bind_params(username, rank)
@@ -39,7 +40,7 @@ def voteExists?(username, rank)
 end
 
 def votedForWebsiteAlready?(username, filepath)
-  db = SQLite3::Database.open("peerratingdb.db")
+  db = openDatabase
 
   statement = db.prepare("select username, filepath from VotedFor where username=? and filepath=?")
   statement.bind_params(username, filepath)
