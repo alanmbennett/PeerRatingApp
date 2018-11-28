@@ -4,7 +4,7 @@ require './login'
 enable(:sessions)
 
 get '/' do
-  "This exists"
+  redirect to('/login')
 end
 
 get '/killer'do

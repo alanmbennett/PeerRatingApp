@@ -90,6 +90,9 @@ end
 #sinatra section
 
 get '/login' do
+  if session[:stud] == true || session[:admin] == true
+    redirect to('/logout')
+  end
   erb :login
 end
 
@@ -126,6 +129,29 @@ post '/create' do
   redirect to('/login')
 end
 
-get '/killer' do
-  "something"
+get '/logout' do
+  if session[:stud] == true || session[:killer] == true
+    erb :logout
+  end
+  redirect to('/login')
+end
+
+post'/logout' do
+  if session[:stud] == true
+    session[:stud] = false
+  end
+  if session[:killer] == true
+    session[:killer] = false
+  end
+  redirect to('/login')
+end
+
+post '/return' do
+  if session[:stud] == true
+    redirect to('/stud')
+  end
+  if session[:killer] == true
+    redirect to('/killer')
+  end
+  redirect to('/login')
 end
