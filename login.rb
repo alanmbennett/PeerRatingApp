@@ -88,6 +88,22 @@ def isStudent?(username)
   return false
 end
 
+# Returns a list of all students
+def getArrayOfStudents()
+  db = openDatabase
+  arr = Array.new
+
+  statement = db.prepare("select username from Users where role=?")
+  statement.bind_params("student")
+
+  # Pushes all student usernames from database into an array
+  statement.execute.each do |row|
+    arr.push(row[0])
+  end
+
+  return arr
+end
+
 #sinatra section
 
 get '/login' do

@@ -1,5 +1,6 @@
 require 'sqlite3'
 require './db_management.rb'
+require './login.rb'
 
 # Returns true if Vote was successful, returns false if Vote failed
 def vote(username, filepath, rank)
@@ -56,4 +57,40 @@ def votedForWebsiteAlready?(username, filepath)
   return false # Vote not found for that website
 end
 
-#puts vote("coolkid", "/anotherwebsite.html", 3)
+# Given a student username, will return an array with the websites they voted for, array will be ordered by rank
+# with index 0 being rank 1 and index 1 being rank 2 and index 2 being rank 3.
+def getStudentVoting(username)
+  db = openDatabase
+  arr = Array.new
+
+  statement = db.prepare("SELECT filepath FROM VotedFor WHERE username=? ORDER BY rank ASC")
+  statement.bind_params(username)
+
+  # Pushes all student usernames from database into an array
+  statement.execute.each do |row|
+    arr.push(row[0])
+  end
+
+  return arr
+end
+
+# Given a website filepath, will return a hash with arrays of students who voted for the website with each array
+# representing a list of students who voted the website as rank 1, 2, and 3.
+def getWebsiteVoting(filepath)
+  db = openDatabase
+  hash = Hash.new()
+  hash[1] = Array.new # key 1 represents an array of students who voted the website as rank 1
+  hash[2] = Array.new # key 2 represents an array of students who voted the website as rank 2
+  hash[3] = Array.new # key 3 represents an array of students who voted the website as rank 3
+
+  statement = db.prepare("SELECT username, rank FROM VotedFor WHERE filepath=?")
+  statement.bind_params(filepath)
+
+  statement.execute.each do |row|
+      hash[row[1]].push(row[0])
+  end
+
+  return hash
+
+end
+
