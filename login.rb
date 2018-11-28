@@ -99,20 +99,31 @@ end
 
 post '/login' do
   if passwordsMatch?(params[:username], params[:password])
-    if getUserRole(params[:username]) == true
+    if isTA?(params[:username]) == true || isInstructor?(params[:username])
       session[:killer] = true
       redirect to('/killer')
-    else
+    end
+    if isStudent?(params[:username])
       session[:stud] = true
       redirect to('/stud')
+    else
+      redirect to ('/Flogin')
     end
   else
     redirect to ('/Flogin')
   end
 end
 
-get '/stuff' do
-  "stuff page"
+get '/create' do
+  erb :create
+end
+
+post '/create' do
+  if userExists?(params[:username])
+    redirect to ('/create')
+  end
+  createAccount(params[:username],params[:password],params[:user])
+  redirect to('/login')
 end
 
 get '/killer' do
