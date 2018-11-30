@@ -1,10 +1,26 @@
 <h1>
-  Loged in a a TA
+  Logged in as a TA
 </h1>
 <form action="/logout" method="get">
   <input type="submit" value="logout"/>
 </form>
+<h2>
+  Upload student accounts
+</h2>
 <form action="/uploadWeb" enctype="multipart/form-data" method="post">
   <input type="file" value="file"/>
   <input type="submit" value="upload"/>
+</form>
+<h2>
+  Upload your student websites here
+</h2>
+<form action="/uploadWeb" enctype="multipart/form-data" method="post">
+  <input type="file" value="file"/>
+  <input type="submit" value="upload"/>
+</form>
+<h2>
+  Download the report
+</h2>
+<form action="/download" enctype="multipart/form-data" method="post">
+  <input type="submit" value="download"/>
 </form>

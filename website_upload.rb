@@ -1,4 +1,5 @@
 require 'sqlite3'
+require 'fileutils'
 require './db_management.rb'
 require './login.rb'
 
@@ -71,19 +72,12 @@ end
 
 post '/uploadWeb' do
   if session[:killer]
-      unless params[:file] &&
-          (tmpfile = params[:file][:tempfile]) &&
-          (name = params[:file][:filename])
-        @error = "No file selected"
-        return haml(:upload)
-      end
-      STDERR.puts "Uploading file, original name #{name.inspect}"
-      while blk = tmpfile.read(65536)
-        # here you would write it to its final location
-        STDERR.puts blk.inspect
-      end
-      "Upload complete"
+    redirect to('/killer')
+  else
     redirect to('/login')
   end
-    redirect to('/killer')
+end
+
+post '/download' do
+  send_file "./files/report.csv"
 end
