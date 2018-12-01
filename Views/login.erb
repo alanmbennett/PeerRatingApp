@@ -1,14 +1,38 @@
-<h1>
-  This is the login form
-</h1>
-<form action="/login" method="POST">
-  <h2>Username</h2>
-  <input type="text" name="username"/>
-  <h2>Password</h2>
-  <input type="password" name="password"/>
-  <input type="submit" value="Log in"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-</form>
-<form action="/create" method="get">
-  <input type="submit" value="create"/>
-</form>
+<style>
+  body {
+    margin:20px;
+  }
+  .form {
+    border-radius: 25px;
+    border: 2px solid black;
+    padding:10px;
+    width: 400px;
+  }
+
+  #form-password {
+    width:300px;
+    display: inline;
+  }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+  <h1 class="alert alert-success">
+    Login Form
+  </h1>
+  <div class="form">
+    <form action="/login" method="POST">
+      <h2>Username</h2>
+      <input type="text" name="username" class="form-control"/>
+      <h2>Password</h2>
+      <input type="password" name="password" class="form-control" id="form-password"/>
+     <input type="submit" class="btn btn-primary" value="Log in"/>
+
+   </form>
+    <form action="/create" method="get">
+      <input type="submit" class="btn btn-primary" value="Create" />
+    </form>
+  </div>
+</body>
