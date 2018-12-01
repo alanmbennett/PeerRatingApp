@@ -20,6 +20,7 @@ end
 # Checks if user already exists in the database and returns whether or not they do
 def userExists?(username)
   db = openDatabase
+  db.interrupt
   check_statement = db.prepare("select username from Users where username=?")
   check_statement.bind_params(username)
 
@@ -37,11 +38,11 @@ def passwordsMatch?(username, password)
   exists = userExists? username
 
   db = openDatabase
+  db.interrupt
   statement = db.prepare("select password from Users where username=?")
   statement.bind_params(username)
 
   if exists
-    db.interrupt
     statement.execute.each do |row|
       if BCrypt::Password.new(row[0]) == password
         return true # Passwords match
