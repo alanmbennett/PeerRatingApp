@@ -34,11 +34,14 @@ end
 
 # Checks if the given password of a given user matches the password in the database
 def passwordsMatch?(username, password)
+  exists = userExists? username
+
   db = openDatabase
   statement = db.prepare("select password from Users where username=?")
   statement.bind_params(username)
 
-  if userExists?(username)
+  if exists
+    db.interrupt
     statement.execute.each do |row|
       if BCrypt::Password.new(row[0]) == password
         return true # Passwords match
@@ -51,11 +54,12 @@ end
 
 # Returns the role of the given user, returns null if user not found
 def getUserRole(username)
+  exists = userExists? username
   db = openDatabase
   statement = db.prepare("select role from Users where username=?")
   statement.bind_params(username)
 
-  if userExists?(username)
+  if exists
     statement.execute.each do |row|
         return row[0]
       end
@@ -100,7 +104,6 @@ def getArrayOfStudents()
   statement.execute.each do |row|
     arr.push(row[0])
   end
-
   return arr
 end
 

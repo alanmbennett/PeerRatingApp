@@ -7,16 +7,15 @@ require './login.rb'
 # Returns true if website insertion to database was successful
 # Returns false if website already exists in database
 def addWebsite(filepath)
-  db = openDatabase
 
   if websiteExists?(filepath)
     return false
   end
 
+  db = openDatabase
   statement = db.prepare("insert into Websites(filePath, orderOfUpload) VALUES(?,?)")
   statement.bind_params(filepath, websiteCount + 1)
   statement.execute
-
   return true
 end
 
@@ -28,7 +27,6 @@ def websiteCount()
   statement.execute.each do |row|
     count = row[0]
   end
-
   return count
 end
 

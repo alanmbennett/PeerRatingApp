@@ -4,7 +4,6 @@ require './login.rb'
 
 # Returns true if Vote was successful, returns false if Vote failed
 def vote(username, filepath, rank)
-  db = openDatabase
 
   # Check to see if vote already exists
   if voteExists?(username, rank)
@@ -17,6 +16,7 @@ def vote(username, filepath, rank)
   end
 
   # Add vote to VoteFor table
+  db = openDatabase
   statement = db.prepare("insert into VotedFor(username, filePath, rank) VALUES(?,?,?)")
   statement.bind_params(username, filepath, rank)
   statement.execute
@@ -53,6 +53,7 @@ def votedForWebsiteAlready?(username, filepath)
       end
     end
   end
+
 
   return false # Vote not found for that website
 end
