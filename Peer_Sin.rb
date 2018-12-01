@@ -1,5 +1,6 @@
 require 'sinatra'
 require './login'
+require './website_upload'
 
 enable(:sessions)
 

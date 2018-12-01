@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 gem 'bcrypt'
+gem 'fileutils'
 gem 'sinatra'
 gem 'sqlite3'

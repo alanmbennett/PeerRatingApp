@@ -1,4 +1,5 @@
 require 'sqlite3'
+require 'fileutils'
 require './db_management.rb'
 require './login.rb'
 
@@ -66,4 +67,17 @@ def getArrayOfWebsites(username)
   end
 
   return arr
+end
+
+
+post '/uploadWeb' do
+  if session[:killer]
+    redirect to('/killer')
+  else
+    redirect to('/login')
+  end
+end
+
+post '/download' do
+  send_file "./files/report.csv"
 end

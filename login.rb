@@ -149,10 +149,10 @@ end
 get '/logout' do
   if session[:stud] == true || session[:killer] == true
     erb :logout
-  end
+  else
   redirect to('/login')
+  end
 end
-
 post'/logout' do
   if session[:stud] == true
     session[:stud] = false
@@ -170,5 +170,10 @@ post '/return' do
   if session[:killer] == true
     redirect to('/killer')
   end
+  redirect to('/login')
+end
+
+get '/logoutup' do
+  session[:stud] = false
   redirect to('/login')
 end
